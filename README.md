@@ -27,6 +27,7 @@ LIVE ENVIRONMENTS AVAILABLE AT:
 
 ### Backend: https://taskwisd.herokuapp.com/
 
+`ps: I have uploaded backend's .env file also to github so you can easily check it.`
 
 
 TASK DONE BY : AVISHEK ADHIKARI
