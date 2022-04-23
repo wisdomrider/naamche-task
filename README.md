@@ -23,6 +23,11 @@ Just Npm install frontend and backend then in backend use
 
 LIVE ENVIRONMENTS AVAILABLE AT:
 
-Backend: 
+### Frontend: https://eclectic-pegasus-09c980.netlify.app/
+
+### Backend: https://taskwisd.herokuapp.com/
+
+`ps: I have uploaded backend's .env file also to github so you can easily check it.`
+
 
 TASK DONE BY : AVISHEK ADHIKARI
