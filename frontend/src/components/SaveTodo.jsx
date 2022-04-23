@@ -13,6 +13,7 @@ import axios from "../configs/axiosConfig";
 import { useLoadingHook } from "../hooks/useLoadingHook";
 import { parseBackendErrors } from "../utils/parseBackendErrors";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useSWRConfig } from "swr";
 
 const SaveTodo = () => {
   const { end, isLoading, start } = useLoadingHook();
@@ -22,6 +23,7 @@ const SaveTodo = () => {
   const showToast = useToast();
   const query = useLocation().search;
   const navigate = useNavigate();
+  const { mutate } = useSWRConfig();
 
   const loadOptions = async (text) => {
     const userNames = await axios.get("/users/names/" + text);
@@ -46,6 +48,7 @@ const SaveTodo = () => {
         description: `Note ${selectedId ? "edited" : "added"} successfully`,
         status: "success",
       });
+      mutate("/notes");
       navigate("/");
     } catch (e) {
       parseBackendErrors(e, showToast);

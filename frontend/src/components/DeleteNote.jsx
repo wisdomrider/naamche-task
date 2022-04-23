@@ -13,13 +13,14 @@ import { useLoadingHook } from "../hooks/useLoadingHook";
 import { parseBackendErrors } from "../utils/parseBackendErrors";
 import axios from "../configs/axiosConfig";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useSWRConfig } from "swr";
 const DeleteModal = () => {
   const [selectedId, setSelectedId] = React.useState(null);
   const { start, end, isLoading } = useLoadingHook();
   const showToast = useToast();
   const query = useLocation().search;
   const navigate = useNavigate();
-
+  const { mutate } = useSWRConfig();
   useEffect(() => {
     if (query === "") return;
     setSelectedId(new URLSearchParams(query).get("id"));
@@ -34,6 +35,7 @@ const DeleteModal = () => {
         description: "Note deleted successfully",
         status: "success",
       });
+      mutate("/notes");
       navigate("/");
     } catch (err) {
       parseBackendErrors(err, showToast);
