@@ -84,7 +84,7 @@ const SaveTodo = () => {
           ></Textarea>
         </FormControl>
         <FormControl mt="4">
-          <FormLabel>Share With</FormLabel>
+          <FormLabel>Share With(Type user username)</FormLabel>
           <AsyncSelect
             value={sharedWith}
             onChange={(e) => setSharedWith(e)}

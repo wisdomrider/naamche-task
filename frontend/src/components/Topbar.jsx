@@ -18,7 +18,7 @@ const Topbar = () => {
   };
 
   return (
-    <Flex height="16" bg="red.100" alignItems="center" p="2">
+    <Flex height="16" bg="blue.200"  alignItems="center" p="2">
       <Heading onClick={() => navigate("/")}>Notes</Heading>
       <Flex flex={1}></Flex>
       {isAuthenticated ? (

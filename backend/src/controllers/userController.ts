@@ -35,13 +35,12 @@ export const getUserNames = async (req: Request, res: Response) => {
     const users = await User.find(
       {
         $text: { $search: req.params.search },
+        _id: { $ne: res.locals.user._id },
       },
       ["username"]
-    );
+    ).limit(6);
 
-    res.json(
-      users.filter((user) => user.username !== res.locals.user.username)
-    );
+    res.json(users);
   } catch (e) {
     console.log(e);
     return generateError(res, "Something went wrong");

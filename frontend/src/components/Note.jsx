@@ -16,7 +16,10 @@ const Note = ({ content, sharedWith, _id }) => {
         <Text> {content}</Text>
         <Divider />
         <small>
-          Shared with: {sharedWith.map((x) => x.username).join(",")}
+          Sharing with:{" "}
+          {sharedWith.length > 0
+            ? sharedWith.map((x) => x.username).join(",")
+            : "nobody"}
         </small>
       </VStack>
       <HStack ml="1">

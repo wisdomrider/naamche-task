@@ -29,6 +29,8 @@ const saveNote = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                     { user: res.locals.user._id },
                 ],
             }, { content, sharedWith }, { new: true });
+            if (!note)
+                return (0, generateError_1.generateError)(res, "Note not found", 404);
         }
         else {
             note = yield Note_1.default.create({
@@ -79,7 +81,10 @@ const deleteNote = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     try {
         const note = yield Note_1.default.findOneAndDelete({
             _id: id,
-            user: res.locals.user._id,
+            $or: [
+                { sharedWith: { $in: [res.locals.user._id] } },
+                { user: res.locals.user._id },
+            ],
         });
         if (!note)
             return (0, generateError_1.generateError)(res, "Note not found", 404);

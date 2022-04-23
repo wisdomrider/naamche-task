@@ -51,8 +51,9 @@ const getUserNames = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     try {
         const users = yield User_1.default.find({
             $text: { $search: req.params.search },
-        }, ["username"]);
-        res.json(users.filter((user) => user.username !== res.locals.user.username));
+            _id: { $ne: res.locals.user._id },
+        }, ["username"]).limit(6);
+        res.json(users);
     }
     catch (e) {
         console.log(e);

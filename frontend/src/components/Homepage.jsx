@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthHook } from "../hooks/useAuthHook";
 import useSWR from "swr";
-import Note from "./Note";
+import Notes from "./Notes";
 const Homepage = () => {
   const { isAuthenticated } = useAuthHook();
   const navigate = useNavigate();
@@ -15,14 +15,10 @@ const Homepage = () => {
         <Text flex={1}>Note List</Text>
         <Button onClick={() => navigate("/add-todo")}>Add Note</Button>
       </Flex>
-      {!data ? (
-        <Skeleton height="20"></Skeleton>
-      ) : (
-        data.map((note) => <Note key={note._id} {...note} />)
-      )}
+      {!data ? <Skeleton height="20"></Skeleton> : <Notes notes={data} />}
     </Box>
   ) : (
-    <Box p="2">Login to see your todos</Box>
+    <Box p="2">Login to see your notes</Box>
   );
 };
 

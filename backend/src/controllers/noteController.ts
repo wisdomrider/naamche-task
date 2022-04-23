@@ -21,6 +21,7 @@ export const saveNote = async (req: Request, res: Response) => {
         { content, sharedWith },
         { new: true }
       );
+      if (!note) return generateError(res, "Note not found", 404);
     } else {
       note = await Note.create({
         content,
@@ -67,7 +68,10 @@ export const deleteNote = async (req: Request, res: Response) => {
   try {
     const note = await Note.findOneAndDelete({
       _id: id,
-      user: res.locals.user._id,
+      $or: [
+        { sharedWith: { $in: [res.locals.user._id] } },
+        { user: res.locals.user._id },
+      ],
     });
     if (!note) return generateError(res, "Note not found", 404);
     res.json({ deleted: true, message: "Note deleted" });

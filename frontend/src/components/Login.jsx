@@ -39,6 +39,7 @@ const Login = () => {
         title: "Success",
         description: "You have successfully logged in.",
         status: "success",
+        
       });
       navigate("/");
     } catch (e) {
